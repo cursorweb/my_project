@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# usage: ./main.py image.jpg classify_image.png
 
 # imagenet.py
 # --model=$NET/resnet18.onnx
