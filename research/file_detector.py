@@ -3,8 +3,6 @@ import sys
 
 # print('truck', 'train', 'car', 'motorcycle', 'bus')
 
-# done: bus, car
-
 name = "train/bus"
 path = os.path.abspath(f"../../jetson-inference/python/training/classification/data/cars_type/{name}")
 
