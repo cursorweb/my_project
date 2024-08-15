@@ -10,8 +10,8 @@ parser.add_argument("filename", type=str, help="file name of the image to proces
 parser.add_argument("--save", type=str, default='none', nargs='?', help="Save a resulting image")
 opt = parser.parse_args()
 
-NETWORK = os.path.join("test_model.onnx")
-LABELS = os.path.join("model/labels.txt")
+NETWORK = "model/resnet18.onnx"
+LABELS = "model/labels.txt"
 
 img = jetson_utils.loadImage(opt.filename)
 net = jetson_inference.imageNet(

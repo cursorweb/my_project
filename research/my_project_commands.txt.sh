@@ -35,7 +35,7 @@ python3 onnx_export.py --model-dir=models/cars_type
 
 # retrain from
 python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/checkpoint.pth.tar
-python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/model_best.pth.tar --start-epoch 0
+python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/model_best.pth.tar --start-epoch 0 --epochs 70
 
 # export
 python3 onnx_export.py --model-dir=models/cars_type
