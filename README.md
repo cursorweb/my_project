@@ -24,7 +24,9 @@ Traffic Detector uses a pre-trained imagenet model to identify five different ty
 ### Training your own model
 To train your own model, you must first build `jetson-inference` as a prerequisite ([Follow steps here](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md)).
 
-Next, unzip and upload the following [**data set**](https://www.kaggle.com/datasets/mrtontrnok/5-vehichles-for-multicategory-classification) to the folder `jetson-inference/python/training/classification/data/cars_type`. Also, move [`model/labels.text`](model/labels.txt) to the folder as well.
+Next, unzip and upload the following [**data set**](https://www.kaggle.com/datasets/mrtontrnok/5-vehichles-for-multicategory-classification) to the folder `jetson-inference/python/training/classification/data/cars_type`.
+
+Also, move [`model/labels.text`](model/labels.txt) to the folder as well.
 
 The file structure `.../cars_type/` should look like this:
 ```
@@ -49,4 +51,9 @@ python3 onnx_export.py --model-dir=models/cars_type
 
 The model should be located in `python/training/classification/models/cars_type/resnet18.onnx`.
 
-[View a video explanation here](video link)
+You can then copy the model into `model/resnet18.onnx`, for example, using this command:
+```sh
+cp ../jetson-inference/python/training/classification/models/cars_type/resnet18.onnx model/resnet18.onnx
+```
+
+[**View a video explanation here**](https://www.youtube.com/watch?v=1_R6nZO-CPk)
