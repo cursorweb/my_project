@@ -3,20 +3,24 @@ import sys
 
 # print('truck', 'train', 'car', 'motorcycle', 'bus')
 
-name = "train/train"
-path = os.path.abspath(f"../jetson-inference/python/training/classification/data/cars_type/{name}")
+# done: bus, car
+
+name = "train/bus"
+path = os.path.abspath(f"../../jetson-inference/python/training/classification/data/cars_type/{name}")
 
 onlyfiles = os.listdir(path)
 
 def get_size(p, f):
     return os.path.getsize(os.path.join(p, f))
 
-empty_count=0
+file_count = 0
+empty_count = 0
 for file in onlyfiles:
-    empty_count += 1
-    # if get_size(path, file) == 0:
-    #     empty_count += 1
-print(empty_count, "files detected")
+    file_count += 1
+    if get_size(path, file) == 0:
+        empty_count += 1
+print(file_count, "files detected for", name)
+print(empty_count, "empty files")
 sys.exit(0)
 # if input("continue?").lower() == "n":
 #     print("aborted")

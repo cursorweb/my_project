@@ -7,10 +7,10 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", type=str, help="file name of the image to process")
-parser.add_argument("--save", type=str, default='', nargs='?', help="Save a resulting image")
+parser.add_argument("--save", type=str, default='none', nargs='?', help="Save a resulting image")
 opt = parser.parse_args()
 
-NETWORK = os.path.join("model/resnet18.onnx")
+NETWORK = os.path.join("test_model.onnx")
 LABELS = os.path.join("model/labels.txt")
 
 img = jetson_utils.loadImage(opt.filename)
@@ -25,7 +25,9 @@ class_idx, confidence = net.Classify(img)
 class_desc = net.GetClassDesc(class_idx)
 confidence = round(confidence * 100, 2)
 
-if opt.save:
+# 'none' is the default if no argument was passed
+# None is if the user didn't specify a file name, but the flag exists
+if opt.save != 'none':
     font = jetson_utils.cudaFont()
     font.OverlayText(img, text=f"{confidence}% {class_desc}", 
                      x=5, y=5,

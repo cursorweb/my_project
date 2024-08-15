@@ -16,8 +16,11 @@ imagenet.py --model=$NET/resnet18.onnx --input_blob=input_0 --output_blob=output
 # Things to run:
 cd jetson-inference
 echo 1 | sudo tee /proc/sys/vm/overcommit_memory
-./docker/run.sh
+# ./docker/run.sh
+# use the hotfix version which contains updated code
+./docker/run.sh --volume /home/nvidia/jetson-inference/python/training/classification:/jetson-inference/python/training/classification
 cd python/training/classification/
+
 
 
 # accuracy too low
@@ -31,10 +34,12 @@ python3 onnx_export.py --model-dir=models/cars_type
 
 
 # retrain from
-python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/resnet18.onnx
-
-# export retrain from
-python3 onnx_export.py --model-dir=models/cars_type --input checkpoint.pth.tar
+python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/checkpoint.pth.tar
+python3 train.py --model-dir=models/cars_type data/cars_type --resume models/cars_type/model_best.pth.tar --start-epoch 0
 
 # export
 python3 onnx_export.py --model-dir=models/cars_type
+
+
+# copy
+cp jetson-inference/python/training/classification/models/cars_type/resnet18.onnx 
