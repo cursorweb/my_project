@@ -28,7 +28,8 @@ confidence = round(confidence * 100, 2)
 # 'none' is the default if no argument was passed
 # None is if the user didn't specify a file name, but the flag exists
 if opt.save != 'none':
-    font = jetson_utils.cudaFont()
+    size = 32 * img.shape[1] / 333
+    font = jetson_utils.cudaFont(size=min(max(32, size), 50))
     font.OverlayText(img, text=f"{confidence}% {class_desc}", 
                      x=5, y=5,
                      color=font.White, background=font.Gray40)
