@@ -21,6 +21,9 @@ Traffic Detector uses a pre-trained imagenet model to identify five different ty
     
     Run `python3 main.py image.jpg --save` to save a new image similar to the [cover image](./cover_art.jpg)
 
+
+> View more example classified images in the [gallery](./examples/README.md).
+
 ### Training your own model
 To train your own model, you must first build `jetson-inference` as a prerequisite ([Follow steps here](https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md)).
 
@@ -56,4 +59,4 @@ You can then copy the model into `model/resnet18.onnx`, for example, using this 
 cp ../jetson-inference/python/training/classification/models/cars_type/resnet18.onnx model/resnet18.onnx
 ```
 
-[**View a video explanation here**](https://www.youtube.com/watch?v=1_R6nZO-CPk)
+[**View a video explanation here**](https://www.youtube.com/watch?v=fwkFNOjE3E0)
