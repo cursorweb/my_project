@@ -7,7 +7,9 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filename", type=str, help="file name of the image to process")
-parser.add_argument("--save", type=str, default='none', nargs='?', help="Save a resulting image")
+parser.add_argument(
+    "--save", type=str, default="none", nargs="?", help="Save a resulting image"
+)
 opt = parser.parse_args()
 
 NETWORK = "model/resnet18.onnx"
@@ -15,10 +17,7 @@ LABELS = "model/labels.txt"
 
 img = jetson_utils.loadImage(opt.filename)
 net = jetson_inference.imageNet(
-    NETWORK,
-    labels=LABELS,
-    input_blob="input_0",
-    output_blob="output_0"
+    NETWORK, labels=LABELS, input_blob="input_0", output_blob="output_0"
 )
 
 class_idx, confidence = net.Classify(img)
@@ -27,19 +26,24 @@ confidence = round(confidence * 100, 2)
 
 # 'none' is the default if no argument was passed
 # None is if the user didn't specify a file name, but the flag exists
-if opt.save != 'none':
+if opt.save != "none":
     size = 32 * img.shape[1] / 333
     font = jetson_utils.cudaFont(size=min(max(32, size), 50))
-    font.OverlayText(img, text=f"{confidence}% {class_desc}", 
-                     x=5, y=5,
-                     color=font.White, background=font.Gray40)
+    font.OverlayText(
+        img,
+        text=f"{confidence}% {class_desc}",
+        x=5,
+        y=5,
+        color=font.White,
+        background=font.Gray40,
+    )
+
     if opt.save == None:
         file_name = f"{os.path.splitext(os.path.basename(opt.filename))[0]}.class.jpg"
     else:
         file_name = opt.save
 
     output = jetson_utils.videoOutput(file_name)
-
     output.Render(img)
 
 
